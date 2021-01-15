@@ -11,5 +11,5 @@ export const Programs = () => {
         }).then(data => console.log(data))
     }, [])
 
-    return <div>programs</div>
+    return <div>something else</div>
 }

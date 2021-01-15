@@ -25,3 +25,4 @@ yarn-error.log*
 
 /api/venv
 /api/.env
+/api/Pipfile.lock
