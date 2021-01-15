@@ -1,4 +1,5 @@
 import csv
+import json
 from flask import Flask, request
 
 
@@ -6,7 +7,17 @@ from flask import Flask, request
 app = Flask(__name__)
 #cors = CORS(app, resources={r"/api":{"origins":"http://localhost:3000"}})
 
-def readCSVToList():
+def filterMethod(x, status, priority):
+    if status and priority:
+        return x['Status'].lower() == status.lower() and int(x['Priority']) == int(priority)
+    elif status:
+        return x['Status'].lower() == status.lower()
+    elif priority:
+        return int(x['Priority']) == int(priority)
+    else:
+        return True
+
+def readCSVToList(status=None, priority=None):
     with open('programs.csv', newline='') as f:
         output = [] 
         reader = csv.reader(f)
@@ -17,19 +28,25 @@ def readCSVToList():
             rowData = {}
             for i in range(len(headers)):
                 rowData[headers[i]] = row[i]
-            print(rowData)
-            output.append(rowData)
-        print(output)
+
+            if filterMethod(rowData, status, priority):
+                output.append(rowData)
+        return output
 
 @app.route('/api', methods=['GET'])
 def index():
-    # print("======>", request.args.get("status"))
-    # print("======>", request.args.get("priority"))
-    readCSVToList()
+    status = request.args.get("status")
+    priority = request.args.get("priority")
+
+    data = readCSVToList(status, priority)
+
+  
+    print(data)
 
     return {
-        'name': 'programs'
+        "data": data
     }
+
 
 if __name__ == '__main__':
     app.run(debug=True)
