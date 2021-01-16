@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 const Table = ({programs, handleDelete}) => {
     return (
@@ -26,4 +26,4 @@ const Table = ({programs, handleDelete}) => {
     )
 }
 
-export default Table
+export default Table;

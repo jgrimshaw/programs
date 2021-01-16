@@ -1,20 +1,27 @@
 import React, { useState, useEffect } from 'react';
-import Filter from '../components/Filter';
-import Table from '../components/Table';
-import ProgramForm from '../components/ProgramForm';
+import Filter from './components/Filter';
+import Table from './components/Table';
+import ProgramForm from './components/ProgramForm';
 
-export const Programs = () => {
+const Programs = () => {
     const [programs, setPrograms] = useState([]);
     const [status, setStatus] = useState('');
     const [priority, setPriority] = useState('');
 
-    const makeApiCall = (status, priority) => {
+    useEffect(() => {
+        makeApiCall(status, priority)
+    }, [])
 
+    const makeApiCall = (status, priority) => {
         fetch(`/api?status=${status}&priority=${priority}`).then(response => {
             if(response.ok) {
                 return response.json()
             }
-        }).then(res => console.log("====>", res.data) || setPrograms(res.data))
+        }).then(res => setPrograms(res.data))
+    }
+
+    const handleApplyFilter = () => {
+        makeApiCall(status, priority)
     }
 
     const handleSubmit = (title, priority, status) => {
@@ -49,26 +56,15 @@ export const Programs = () => {
         }).then(res =>  setPrograms(res.data))
     }
 
-    const handleApplyFilter = () => {
-        console.log("=====calling", status, priority)
-        makeApiCall(status, priority)
-    }
-
-    useEffect(() => {
-        makeApiCall(status, priority)
-    }, [])
-
     return <div>
-
             <Filter
                 handleApplyFilter={handleApplyFilter} 
                 handlePriorityChange={(e) => setPriority(e.target.value)}
                 handleStatusChange={(e) => setStatus(e.target.value)} 
             />
-            
             <Table programs={programs} handleDelete={handleDelete}/>     
-
             <ProgramForm handleSubmit={handleSubmit}/>
         </div>
-
 }
+
+export default Programs;

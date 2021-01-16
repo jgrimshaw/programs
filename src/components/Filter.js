@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 const  Filter = ({ handleApplyFilter, handlePriorityChange, handleStatusChange}) => {
     return (
@@ -33,4 +33,4 @@ const  Filter = ({ handleApplyFilter, handlePriorityChange, handleStatusChange})
     )
 }
 
-export default Filter
+export default Filter;
