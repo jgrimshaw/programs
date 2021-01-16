@@ -1,5 +1,5 @@
 
-import { Programs } from './components/Programs';
+import { Programs } from './containers/Programs';
 
 function App() {
     return (
