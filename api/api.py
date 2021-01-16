@@ -3,9 +3,20 @@ import json
 from flask import Flask, request
 
 
-#from flask.ext.cors import CORS, cross_origin
 app = Flask(__name__)
-#cors = CORS(app, resources={r"/api":{"origins":"http://localhost:3000"}})
+
+def writeFile(writeType, data):
+    f = open('programs.csv', writeType)
+    if writeType == 'a':
+        f.write('\n')
+        f.write(data['Program Title'] + ',' + data['Priority'] + ',' + data['Status'])
+    elif writeType == 'w':
+        f.write('Program Title' + ',' + 'Priority' + ',' + 'Status')
+        for row in data:
+            f.write('\n')
+            f.write(row['Program Title'] + ',' + row['Priority'] + ',' + row['Status'])
+    
+    f.close()
 
 def filterMethod(x, status, priority):
     if status and priority:
@@ -35,18 +46,39 @@ def readCSVToList(status=None, priority=None):
 
 @app.route('/api', methods=['GET'])
 def index():
-    status = request.args.get("status")
-    priority = request.args.get("priority")
+    status = None if request.args.get('status') == 'undefined' else request.args.get('status')
+    priority = None if request.args.get('priority') == 'undefined' else request.args.get('priority')
 
     data = readCSVToList(status, priority)
-
   
-    print(data)
+    #print(data)
 
     return {
-        "data": data
+        'data': data
     }
 
+@app.route('/api/add', methods=['POST'])
+def add():
+    writeFile('a',request.json)
+   
+    return {
+        'data': 'Add Success'
+    }
+  
+@app.route('/api/delete/<title>', methods=['DELETE'])
+def delete(title):
+    mainList = readCSVToList()
+    newList = []
+    for data in mainList:
+        if data['Program Title'].lower() != title.lower():
+            newList.append(data)
+    
+    writeFile('w', newList)
+
+    return {
+        'data': newList
+    }
+  
 
 if __name__ == '__main__':
     app.run(debug=True)

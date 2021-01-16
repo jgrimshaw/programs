@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Table = ({programs}) => {
+const Table = ({programs, handleDelete}) => {
     return (
         <div>
            <table>
@@ -17,6 +17,7 @@ const Table = ({programs}) => {
                            <td>{row['Program Title']}</td>
                            <td>{row['Priority']}</td>
                            <td>{row['Status']}</td>
+                           <td><button onClick={() => handleDelete(row['Program Title'])}>Delete</button></td>
                        </tr>)
                    }
                </tbody>
