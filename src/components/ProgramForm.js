@@ -8,11 +8,9 @@ const ProgramForm = ({ handleSubmit }) => {
 
     return (
         <div className='option-container'>
-           
             <input type='text' name='title' value={title} onChange={(e) => setTitle(e.target.value)} />
-
             <div>
-                <select name='priority' id='priority' value={priority} onChange={(e) => setPriority(e.target.value)}>
+                <select name='priority' id='priority' value={priority} className='select' onChange={(e) => setPriority(e.target.value)}>
                     <option value=''>Priority</option>
                     <option value='1'>High</option>
                     <option value='2'>Medium</option>
@@ -21,7 +19,7 @@ const ProgramForm = ({ handleSubmit }) => {
             </div>
 
             <div>
-                <select name='status' id='status' value={status} onChange={(e) => setStatus(e.target.value)}>
+                <select name='status' id='status' value={status} className='select' onChange={(e) => setStatus(e.target.value)}>
                     <option value=''>Status</option>
                     <option value='available'>Available</option>
                     <option value='Not available'>Not available</option>
@@ -29,11 +27,13 @@ const ProgramForm = ({ handleSubmit }) => {
             </div>
 
             <div>
-                <button disabled={!(title && status && priority)} onClick={() => {
-                    handleSubmit(title, priority, status) 
-                    setPriority('');
-                    setStatus('');
-                    setTitle('');
+                <button 
+                    className='btn-submit'
+                    disabled={!(title && status && priority)} onClick={() => {
+                        handleSubmit(title, priority, status) 
+                        setPriority('');
+                        setStatus('');
+                        setTitle('');
                 }}>Submit</button>
             </div>
         </div>

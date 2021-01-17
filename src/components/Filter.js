@@ -12,7 +12,7 @@ const  Filter = ({ handleApplyFilter, handlePriorityChange, handleStatusChange})
                 </select>
             </div>
 
-            <div>
+            <div className='option-container'>
                 <select name='status' id='status' onChange={handleStatusChange}>
                     <option  value=''>Status (All)</option>
                     <option value='available'>Available</option>

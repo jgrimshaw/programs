@@ -2,7 +2,7 @@
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box
+    box-sizing: border-box;
 }
 
 html,
@@ -15,11 +15,91 @@ body {
     text-rendering: optimizeLegibility;
 }
 
+/* options: filter + add program */
+.options-container {
+    display: flex;
+    justify-content: center;
+    background-color: #F7F7F8;
+    padding: 1rem;
+}
+
+.option-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+select {
+    appearance: none;
+    background-color: #fff;
+    font-family: 'Titillium Web', sans-serif;
+    width: 100%;
+    min-width: 8rem;
+    max-width: 9rem;
+    border: 1px solid #003f7b;
+    border-radius: 2rem;
+    padding: 0.5rem 1.5rem;
+    cursor: pointer;
+    background-image: url("data:image/svg+xml;utf8,<svg fill='dimgray' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>");
+    background-repeat: no-repeat;
+    background-position-x: 95%;
+    background-position-y: 6px;
+    margin: 0rem 1rem;
+}
+
+select:focus {
+    outline: none;
+    border: 1px solid #0481f5;
+}
+
+button {
+    border: none;
+    background-color: transparent;
+    font-family: 'Titillium Web', sans-serif;
+    font-weight: 600;
+    font-size: 0.9rem;
+    padding: 0rem 1rem 0rem 0.5rem;
+    cursor: pointer;
+    color: #94162a;
+}
+
+button.btn-submit {
+    color:gray
+}
+
+button.btn-submit:disabled {
+    color: gray
+}
+button.btn-submit:enabled {
+    color: #DA291C
+}
+
+button:hover {
+    color: #DA291C
+}
+
+button:focus {
+    outline: none;
+    color: #DA291C;
+}
+
+input {
+    padding: 0.6rem 0.5rem;
+    width: 15rem;
+    margin-left: 2rem;
+    border-radius: 0.3rem;
+    border: 1px solid #003f7b;
+}
+
+input:focus {
+    outline: none;
+    border: 1px solid #0481f5;
+}
+
 /* header */
 .header {
     background-color:  #a6192e;
     height: 2.8rem;
-    
 }
 .header:nth-of-type(even) {
     background-color:#94162a;
@@ -35,6 +115,7 @@ body {
 
 th {
     text-align: left;
+    font-weight: 600;
     padding: 1rem 2rem 0.5rem 2rem;
 }
 
@@ -59,5 +140,4 @@ td {
     text-align: center;
 }
 
-/* options: filter, add program */
 
