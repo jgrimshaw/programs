@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Filter from './components/Filter';
 import Table from './components/Table';
 import ProgramForm from './components/ProgramForm';
+import Header from './components/Header';
 
 const Programs = () => {
     const [programs, setPrograms] = useState([]);
@@ -57,13 +58,18 @@ const Programs = () => {
     }
 
     return <div>
-            <Filter
-                handleApplyFilter={handleApplyFilter} 
-                handlePriorityChange={(e) => setPriority(e.target.value)}
-                handleStatusChange={(e) => setStatus(e.target.value)} 
-            />
+            <Header />
+            <h1>Programs</h1>
+            <div className='options-container'>
+                <Filter
+                    handleApplyFilter={handleApplyFilter} 
+                    handlePriorityChange={(e) => setPriority(e.target.value)}
+                    handleStatusChange={(e) => setStatus(e.target.value)} 
+                />
+                <ProgramForm handleSubmit={handleSubmit}/>
+            </div>
             <Table programs={programs} handleDelete={handleDelete}/>     
-            <ProgramForm handleSubmit={handleSubmit}/>
+            
         </div>
 }
 

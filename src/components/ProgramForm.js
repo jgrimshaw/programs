@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import '../css/styles.css';
 
 const ProgramForm = ({ handleSubmit }) => {
     const [ title, setTitle ] = useState('')
@@ -6,14 +7,13 @@ const ProgramForm = ({ handleSubmit }) => {
     const [ status, setStatus ] = useState('')
 
     return (
-        <div>
+        <div className='option-container'>
            
-            <input type='text' name='title' value={title} onChange={(e)=> setTitle(e.target.value)}/>
+            <input type='text' name='title' value={title} onChange={(e) => setTitle(e.target.value)} />
 
             <div>
-                <label htmlFor='priority'>Priority</label>
-                <select name='priority' id='priority' onChange={(e) => setPriority(e.target.value)}>
-                    <option>Priority</option>
+                <select name='priority' id='priority' value={priority} onChange={(e) => setPriority(e.target.value)}>
+                    <option value=''>Priority</option>
                     <option value='1'>High</option>
                     <option value='2'>Medium</option>
                     <option value='3'>Low</option>
@@ -21,20 +21,21 @@ const ProgramForm = ({ handleSubmit }) => {
             </div>
 
             <div>
-                <label htmlFor='status'>Status</label>
-
-                <select name='status' id='status' onChange={(e) => setStatus(e.target.value)}>
-                <option>Status</option>
+                <select name='status' id='status' value={status} onChange={(e) => setStatus(e.target.value)}>
+                    <option value=''>Status</option>
                     <option value='available'>Available</option>
                     <option value='Not available'>Not available</option>
-        
                 </select>
             </div>
 
             <div>
-                <button disabled={!(title && status && priority)} onClick={()=> handleSubmit(title, priority, status) }>Submit</button>
+                <button disabled={!(title && status && priority)} onClick={() => {
+                    handleSubmit(title, priority, status) 
+                    setPriority('');
+                    setStatus('');
+                    setTitle('');
+                }}>Submit</button>
             </div>
-            
         </div>
     )
 }

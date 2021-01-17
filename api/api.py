@@ -2,7 +2,6 @@ import csv
 import json
 from flask import Flask, request
 
-
 app = Flask(__name__)
 
 def writeFile(writeType, data):
@@ -15,7 +14,7 @@ def writeFile(writeType, data):
         for row in data:
             f.write('\n')
             f.write(row['Program Title'] + ',' + row['Priority'] + ',' + row['Status'])
-    
+
     f.close()
 
 def filterMethod(x, status, priority):
@@ -50,7 +49,7 @@ def index():
     priority = None if request.args.get('priority') == 'undefined' else request.args.get('priority')
 
     data = readCSVToList(status, priority)
-  
+
     #print(data)
 
     return {
