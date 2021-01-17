@@ -1,6 +1,7 @@
+
 import React from 'react';
 
-const  Filter = ({ handleApplyFilter, handlePriorityChange, handleStatusChange}) => {
+const  Filter = ({ handleApplyFilter, handlePriorityChange, handleStatusChange }) => {
     return (
         <div className='option-container'>
             <div>
@@ -14,9 +15,9 @@ const  Filter = ({ handleApplyFilter, handlePriorityChange, handleStatusChange})
 
             <div className='option-container'>
                 <select name='status' id='status' onChange={handleStatusChange}>
-                    <option  value=''>Status (All)</option>
-                    <option value='available'>Available</option>
-                    <option value='Not available'>Not available</option>
+                    <option value=''>Status (All)</option>
+                    <option value='Available'>Available</option>
+                    <option value='Not Available'>Not Available</option>
                 </select>
             </div>
 

@@ -1,8 +1,10 @@
+
 import React, { useState, useEffect } from 'react';
 import Filter from './components/Filter';
 import Table from './components/Table';
 import ProgramForm from './components/ProgramForm';
 import Header from './components/Header';
+import Footer from './components/Footer';
 
 const Programs = () => {
     const [programs, setPrograms] = useState([]);
@@ -11,11 +13,12 @@ const Programs = () => {
 
     useEffect(() => {
         makeApiCall(status, priority)
+        // eslint-disable-next-line
     }, [])
 
     const makeApiCall = (status, priority) => {
         fetch(`/api?status=${status}&priority=${priority}`).then(response => {
-            if(response.ok) {
+            if (response.ok) {
                 return response.json()
             }
         }).then(res => setPrograms(res.data))
@@ -37,12 +40,11 @@ const Programs = () => {
                 'Priority': priority,
                 'Status': status
             })
-        })
-        .then(response => {
-            if(response.ok) {
+        }).then(response => {
+            if (response.ok) {
                 return response.json()
             }
-        }).then(()=> {
+        }).then(() => {
             makeApiCall()
         })
     }
@@ -51,26 +53,27 @@ const Programs = () => {
         fetch(`/api/delete/${title}`, {
             method: 'DELETE'
         }).then(response => {
-            if(response.ok) {
+            if (response.ok) {
                 return response.json()
             }
-        }).then(res =>  setPrograms(res.data))
+        }).then(res => setPrograms(res.data))
     }
 
     return <div>
-            <Header />
-            <h1>Programs</h1>
-            <div className='options-container'>
-                <Filter
-                    handleApplyFilter={handleApplyFilter} 
-                    handlePriorityChange={(e) => setPriority(e.target.value)}
-                    handleStatusChange={(e) => setStatus(e.target.value)} 
-                />
-                <ProgramForm handleSubmit={handleSubmit}/>
-            </div>
-            <Table programs={programs} handleDelete={handleDelete}/>     
-            
+        <Header />
+        <h1>Programs</h1>
+        <div className='options-container'>
+            <Filter
+                handleApplyFilter={handleApplyFilter}
+                handlePriorityChange={(e) => setPriority(e.target.value)}
+                handleStatusChange={(e) => setStatus(e.target.value)}
+            />
+            <ProgramForm handleSubmit={handleSubmit} />
         </div>
+        <Table programs={programs} handleDelete={handleDelete} />
+        <Footer />
+    </div>
+
 }
 
 export default Programs;
