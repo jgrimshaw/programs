@@ -13,7 +13,6 @@ const Programs = () => {
 
     useEffect(() => {
         makeApiCall(status, priority)
-        // eslint-disable-next-line
     }, [])
 
     const makeApiCall = (status, priority) => {
